@@ -60,7 +60,7 @@ router.get('/post/:postId', async (req, res) => {
 
 router.get('/add', isLoggedIn, async function(req, res, next) {
   const user = await userModel.findOne({username:req.session.passport.user});
-  res.render('add',{user,nav:true});
+  res.render('add',{user,nav:false});
 });
 
 router.post('/createpost', isLoggedIn, upload.single("postimage"), async function(req, res, next) {
