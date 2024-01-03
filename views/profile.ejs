@@ -1,0 +1,145 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full px-10 py-3 flex items-center justify-between bg-zinc-800 text-white">
+      <a href="/feed">Pinterest</a>
+      <input class="p-2 rounded-lg w-80" type="text" placeholder="Search">
+      <div class="flex gap-10 items-center">
+        <a href="/profile">Profile</a><a href="/feed">Feed</a><a class="px-3 py-2 bg-red-700 text-white rounded-lg " href="/logout">Log Out</a>
+      </div>
+    </div>
+  
+<div class="profile w-full min-h-screen bg-zinc-800 text-white pt-1 ">
+        <form id="uploadform" hidden action="/fileupload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+        </form>
+        <div class="profdets flex flex-col items-center mt-10">
+            <div class="relative">
+                <span id="uploadicon" class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex items-center justify-center bg-zinc-200">
+                    <i class="ri-pencil-fill text-zinc-800"></i>
+                </span>
+                <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
+                    <img class="w-full h-full object-cover" src="/images/uploads/<%=user.profileImage%>" alt="">
+                </div>
+            </div>
+            <h1 class="mt-5 text-3xl font-semibold"><%= user.name%></h1>
+            <h3 class="text-md">@<%=user.username%></h3>
+            <a href="/edit" class="mt-5 px-7 py-2 bg-zinc-700 rounded-full text-xs font-semibold">Edit</a>
+            <a href="/add" class="px-10 py-2 rounded-lg bg-red-700 text-xs font-semibold mt-7">Add New Post</a>
+        </div>
+        <div class="cards flex flex-wrap gap-10 px-10 mt-10">
+            <div class="card">
+                <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
+                    <img class="w-full h-full object-cover " src="/images/uploads/<%=user?.posts[0]?.image%>" alt="">
+                </div>
+                <a href="/show/posts" class="inline-block text-xl font-semibold mt-3">Your Pins</a>
+                <h5 class="text-sm font-medium opacity-60"><%=user.posts.length%> Pins</h5>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector("#uploadicon").addEventListener("click",function(){
+            document.querySelector("#uploadform input").click();
+        })
+        document.querySelector("#uploadform input").addEventListener("change",function(){
+            document.querySelector("#uploadform").submit();
+        })
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-zinc-800 text-white">
+
+    <!-- nav bar -->
+    <div class="w-full px-4 sm:px-6 md:px-8 lg:px-10 py-3 flex items-center justify-between bg-zinc-800 text-white">
+        <a href="/feed" class="text-lg font-semibold flex items-center gap-2">
+          <img class="w-8 h-8 md:w-10 md:h-10" src="https://cdn.icon-icons.com/icons2/2992/PNG/512/pinterest_logo_icon_187314.png" alt="">
+          Pinterest
+        </a>
+        <div class="flex items-center">
+          <a href="/search"><input class="p-2 rounded-lg w-28 md:w-40 lg:w-60 ml-2 md:ml-4 mr-2 md:mr-4" type="text" placeholder="Search"></a>
+          <a href="/feed" class="text-sm md:text-base mr-2">Feed</a>
+          <a class="px-2 py-1 md:px-3 md:py-2 bg-red-700 text-white rounded-lg text-xs md:text-sm" href="/logout">Log Out</a>
+        </div>
+      </div>
+  
+    <div class="profile w-full min-h-screen bg-zinc-800 text-white pt-1 px-4 sm:px-6 md:px-8 lg:px-10">
+        <form id="uploadform" hidden action="/fileupload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+        </form>
+        <div class="profdets flex flex-col items-center mt-10 mx-auto max-w-md">
+            <div class="relative">
+                <span id="uploadicon" class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex items-center justify-center bg-zinc-200">
+                    <i class="ri-pencil-fill text-zinc-800"></i>
+                </span>
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-zinc-200 rounded-full overflow-hidden">
+                    <img class="w-full h-full object-cover" src="/images/uploads/<%=user.profileImage%>" alt="">
+                </div>
+            </div>
+            <h1 class="mt-5 text-2xl md:text-4xl font-semibold"><%= user.name%></h1>
+            <h3 class="text-sm md:text-md">@<%=user.username%></h3>
+            <div class="follow-dets flex gap-6">
+                <h3 class="text-sm md:text-lg font-semibold text-gray-400">Followers : <span class="text-white"><%=user.followers.length%></span></h3>
+                <h3 class="text-sm md:text-lg font-semibold text-gray-400">Following : <span class="text-white"><%=user.following.length%></span></h3>
+            </div>
+            <a href="/edit" class="mt-5 px-5 md:px-7 py-2 bg-zinc-700 rounded-full text-xs md:text-base font-semibold">Edit</a>
+            <a href="/add" class="px-5 py-2 rounded-lg bg-red-700 text-xs md:text-base font-semibold mt-3 md:mt-7">Add New Post</a>
+        </div>
+
+        <div class="flex flex-wrap gap-4 md:gap-10">
+        <div class="cards flex flex-wrap gap-4 md:gap-10 mt-10">
+            <div class="card">
+                <div class="w-44 h-40 md:w-52 md:h-48 bg-zinc-200 rounded-lg overflow-hidden">
+                    <img class="w-full h-full object-cover " src="/images/uploads/<%=user?.posts[0]?.image%>" alt="">
+                </div>
+                <a href="/show/posts" class="inline-block text-lg font-semibold mt-3">Your Pins</a>
+                <h5 class="text-sm font-medium opacity-60"><%=user.posts.length%> Pins</h5>
+            </div>
+        </div>
+
+        <div class="cards flex flex-wrap gap-4 md:gap-10 mt-10">
+            <div class="card">
+                <div class="w-44 h-40 md:w-52 md:h-48 bg-zinc-200 rounded-lg overflow-hidden">
+                    <img class="w-full h-full object-cover " src="/images/uploads/<%=user?.posts[0]?.image%>" alt="">
+                </div>
+                <a href="#" class="inline-block text-lg font-semibold mt-3">Saved Pins</a>
+                <h5 class="text-sm font-medium opacity-60"><%=user.saves.length%> Pins</h5>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelector("#uploadicon").addEventListener("click",function(){
+            document.querySelector("#uploadform input").click();
+        })
+        document.querySelector("#uploadform input").addEventListener("change",function(){
+            document.querySelector("#uploadform").submit();
+        })
+    </script>
+</body>
+</html>
+
