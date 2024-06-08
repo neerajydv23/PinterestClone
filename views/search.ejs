@@ -38,7 +38,7 @@
         <div class="profdets flex flex-col items-center mt-10 mx-auto max-w-md">
             <div class="relative">
                 <div class="w-32 h-32 md:w-40 md:h-40 bg-zinc-200 rounded-full overflow-hidden">
-                    <img class="w-full h-full object-cover" src="/images/uploads/<%=user.profileImage%>" alt="">
+                    <img class="w-full h-full object-cover" src="<%=user.profileImage%>" alt="">
                 </div>
             </div>
             <h1 class="mt-5 text-2xl md:text-3xl font-semibold"><%= user.name%></h1>
@@ -52,7 +52,7 @@
         <div class="cards flex flex-wrap gap-4 md:gap-10 mt-10">
             <div class="card">
                 <div class="w-44 h-40 md:w-52 md:h-48 bg-zinc-200 rounded-lg overflow-hidden">
-                    <img class="w-full h-full object-cover " src="/images/uploads/<%=user?.posts[0]?.image%>" alt="">
+                    <img class="w-full h-full object-cover " src="<%=user?.posts[0]?.image%>" alt="">
                 </div>
                 <a href="/show/posts" class="inline-block text-lg font-semibold mt-3">Your Pins</a>
                 <h5 class="text-sm font-medium opacity-60"><%=user.posts.length%> Pins</h5>
@@ -73,7 +73,7 @@
                     clutter += `<a href="/profile/${elem.username}" class="outline-none">
                 <div class="text-white flex items-center gap-4 mt-5">
                     <div class="image w-5 h-5 sm:w-8 sm:h-8 rounded-full overflow-hidden">
-                        <img src="/images/uploads/${elem.profileImage}" alt="">
+                        <img src="${elem.profileImage}" alt="">
                     </div>
                     <div class="text text-[4xl] sm:text-base">
                         <h3>${elem.username}</h3>

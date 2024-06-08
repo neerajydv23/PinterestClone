@@ -29,7 +29,7 @@
                 <div class="card w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 px-4 mb-8">
                   <a href="/post/<%= elem._id %>">
                     <div class="w-full h-48 sm:h-64 bg-zinc-700 rounded-lg overflow-hidden">
-                        <img class="w-full h-full object-cover" src="/images/uploads/<%=elem.image%>" alt="">
+                        <img class="w-full h-full object-cover" src="<%=elem.image%>" alt="">
                     </div>
                     <h5 class="mt-2 text-sm"><%=elem.title%></h5>
                     <h6 class="text-xs opacity-500 font-semibold">@<%= elem.user.username%></h6>

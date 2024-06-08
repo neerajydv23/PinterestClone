@@ -4,7 +4,15 @@ var userModel = require('./users');
 var postModel = require('./post');
 const passport = require('passport');
 const localStrategy = require('passport-local');
-const upload = require('./multer');
+require('dotenv').config();
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'dntlmdwzu', 
+  api_key: '184588341218153', 
+  api_secret: 'bDuSIRaI6F5ismdi2JOqjGySteI'
+});
 
 passport.use(new localStrategy(userModel.authenticate()))
 
@@ -63,24 +71,41 @@ router.get('/add', isLoggedIn, async function(req, res, next) {
   res.render('add',{user,nav:false});
 });
 
-router.post('/createpost', isLoggedIn, upload.single("postimage"), async function(req, res, next) {
+router.post('/createpost', isLoggedIn, async function(req, res, next) {
   const user = await userModel.findOne({username:req.session.passport.user});
-  const post = await postModel.create({
-    user:user._id,
+  const post = req.files.postimage;
+  cloudinary.uploader.upload(post.tempFilePath, async function (err, result) {
+    if (err) return next(err);
+    const newPost = new postModel({
+      user:user._id,
     title:req.body.title,
     description:req.body.description,
-    image:req.file.filename
-  })
-  user.posts.push(post._id);
+      image: result.secure_url,
+    });
+    await newPost.save();
+
+  user.posts.push(newPost._id);
   await user.save();
   res.redirect("/profile");
 });
+});
 
-router.post('/fileupload', isLoggedIn, upload.single("image"), async function(req,res,next){
-  const user = await userModel.findOne({username:req.session.passport.user});
-  user.profileImage = req.file.filename;
-  await user.save();
-  res.redirect("/profile");
+router.post('/fileupload', isLoggedIn, async function(req,res,next){
+  // const user = await userModel.findOne({username:req.session.passport.user});
+  // user.profileImage = req.file.filename;
+  // await user.save();
+  // res.redirect("/profile");
+  const user = req.files.image;
+  cloudinary.uploader.upload(user.tempFilePath, async function (err, result) {
+    if (err) return next(err);
+    const newUser = await userModel.findOneAndUpdate(
+      {username:req.session.passport.user},
+      {profileImage:result.secure_url},
+      {new:true}
+    );
+    await newUser.save();
+    res.redirect("/profile");
+  })
 });
 
 router.post('/register', function(req, res, next) {

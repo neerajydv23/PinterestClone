@@ -27,7 +27,7 @@
         <div class="profdets flex flex-col items-center mt-10 mx-auto max-w-md">
             <div class="relative">
                 <div class="w-32 h-32 md:w-40 md:h-40 bg-zinc-200 rounded-full overflow-hidden">
-                    <img class="w-full h-full object-cover" src="/images/uploads/<%=followerUser.profileImage%>" alt="">
+                    <img class="w-full h-full object-cover" src="<%=followerUser.profileImage%>" alt="">
                 </div>
             </div>
             <h1 class="mt-5 text-2xl md:text-3xl font-semibold"><%= followerUser.name%></h1>
@@ -51,7 +51,7 @@
         <div class="cards flex flex-wrap gap-4 md:gap-10 mt-10">
             <div class="card">
                 <div class="w-44 h-40 md:w-52 md:h-48 bg-zinc-200 rounded-lg overflow-hidden">
-                    <img class="w-full h-full object-cover " src="/images/uploads/<%=followerUser?.posts[0]?.image%>" alt="">
+                    <img class="w-full h-full object-cover " src="<%=followerUser?.posts[0]?.image%>" alt="">
                 </div>
                 <a href="#" class="inline-block text-lg font-semibold mt-3"><%=followerUser.name%> Pins</a>
                 <h5 class="text-sm font-medium opacity-60"><%=followerUser.posts.length%> Pins</h5>
